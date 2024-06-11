@@ -3,11 +3,8 @@ import Header from './components/Header.jsx';
 import PhoneBook from './page/PhoneBook.jsx';
 import AddContact from './page/AddContact.jsx';
 
-import { ContactProvider } from './storage/Contact.jsx';
-
 function App() {
   return (
-    <ContactProvider>
       <Router>
         <header>
           <Header />
@@ -19,7 +16,6 @@ function App() {
           </Routes>
         </main>
       </Router>
-    </ContactProvider>
   );
 }
 

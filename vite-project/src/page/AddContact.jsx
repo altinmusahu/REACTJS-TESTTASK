@@ -15,6 +15,7 @@ export default function AddContact() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  
 
 
   const handleAddEmail = () => {
@@ -41,9 +42,22 @@ export default function AddContact() {
     setPhoneNumbers(newPhoneNumbers);
   };
 
+  const isValidPhoneNumber = (number) => {
+    const phoneRegex = /^\d{9}$/; // Assuming a valid phone number has 10 digits
+    return phoneRegex.test(number);
+  };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!phoneNumbers.every(isValidPhoneNumber)) {
+      alert('Please enter valid phone numbers');
+      return;
+    }
+
+
         axios.post('http://localhost:4000/register',{
           name,
           lastname,
@@ -61,6 +75,8 @@ export default function AddContact() {
       })
       .catch(err => console.log(err))
     }
+
+
 
 
   return (
