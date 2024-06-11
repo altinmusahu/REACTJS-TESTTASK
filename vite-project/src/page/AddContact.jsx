@@ -1,8 +1,19 @@
 import { useState } from 'react';
 
+import { useContact } from '../storage/Contact.jsx';
+
+
 export default function AddContact() {
   const [emails, setEmails] = useState(['']);
   const [phoneNumbers, setPhoneNumbers] = useState(['']);
+
+  const { addContact } = useContact();
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
 
   const handleAddEmail = () => {
     if (emails.length < 4) {
@@ -28,26 +39,87 @@ export default function AddContact() {
     setPhoneNumbers(newPhoneNumbers);
   };
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newContact = {
+      name,
+      lastname,
+      address,
+      city,
+      country,
+      emails,
+      phoneNumbers,
+    };
+    addContact(newContact);
+
+    localStorage.setItem('contact', JSON.stringify(newContact));
+
+    
+    setName('');
+    setLastname('');
+    setAddress('');
+    setCity('');
+    setCountry('');
+    setEmails(['']);
+    setPhoneNumbers(['']);
+  };
+
   return (
     <div className="container mx-auto p-4 mt-8">
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-0">Register new contact</h1>
       </div>
-      <form className="mt-8">
+      <form className="mt-8" onSubmit={handleSubmit}>
         <label className="block mb-1 text-base font-medium text-gray-900">Name:</label>
-        <input type="text" placeholder="Enter the Name" className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" />
+        <input 
+          value={name} 
+          required 
+          type="text"
+          placeholder="Enter the Name"
+          className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" 
+          onChange={(e) => setName(e.target.value)}
+        />
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">Lastname:</label>
-        <input type="text" placeholder="Enter Lastname" className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" />
+        <input 
+          value={lastname} 
+          required 
+          type="text" 
+          placeholder="Enter Lastname" 
+          className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500"
+          onChange={(e) => setLastname(e.target.value)} 
+        />
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">Address:</label>
-        <input type="text" placeholder="Enter Address" className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" />
+        <input 
+          value={address} 
+          required 
+          type="text" 
+          placeholder="Enter Address" 
+          className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500"
+          onChange={(e) => setAddress(e.target.value)}
+        />
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">City:</label>
-        <input type="text" placeholder="Enter City" className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" />
+        <input 
+          value={city} 
+          required 
+          type="text" 
+          placeholder="Enter City" 
+          className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" 
+          onChange={(e) => setCity(e.target.value)}
+        />
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">Country:</label>
-        <input type="text" placeholder="Enter Country" className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" />
+        <input 
+          value={country} 
+          required 
+          type="text" 
+          placeholder="Enter Country" 
+          className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" 
+          onChange={(e) => setCountry(e.target.value)}
+        />
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">Email:</label>
         {emails.map((email, index) => (
@@ -58,6 +130,7 @@ export default function AddContact() {
               onChange={(e) => handleEmailChange(index, e.target.value)}
               placeholder="Enter Email" 
               className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" 
+              required
             />
             {index === emails.length - 1 && emails.length < 4 && (
               <button 
@@ -69,14 +142,15 @@ export default function AddContact() {
         ))}
 
         <label className="block mb-1 mt-3 text-base font-medium text-gray-900">Number:</label>
-        {phoneNumbers.map((number, index) => (
+        {phoneNumbers.map((phoneNumber, index) => (
           <div key={index} className="flex items-center mb-2">
             <input 
               type="text" 
-              value={number}
+              value={phoneNumber}
               onChange={(e) => handlePhoneNumberChange(index, e.target.value)}
               placeholder="Enter Number" 
               className="block w-full p-2 border border-gray-300 rounded-lg bg-gray-50 text-xs dark:placeholder-gray-500" 
+              required 
             />
             {index === phoneNumbers.length - 1 && phoneNumbers.length < 4 && (
               <button 
