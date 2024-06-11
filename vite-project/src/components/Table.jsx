@@ -10,8 +10,8 @@ export default function Table() {
     address: "",
     city: "",
     country: "",
-    emails: "",
-    phoneNumbers: "",
+    emails: [],
+    phoneNumbers: [],
 });
 const [isUpdating, setIsUpdating] = useState(false);
 
