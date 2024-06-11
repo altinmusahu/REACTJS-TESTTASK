@@ -1,18 +1,20 @@
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header.jsx';
+import PhoneBook from './page/PhoneBook.jsx';
 
 function App() {
-
   return (
-    <>
-    <div className="m-24 mt-12 flex-wrap">
-      <h1 className="m-24">Starting</h1>
-      <h1 className="m-24">Starting</h1>
-      <h1 className="m-24">Starting</h1>
-      <h1 className="m-24">Starting</h1>
-
-    </div>
-    </>
-  )
+    <Router>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<PhoneBook />} />
+        </Routes>
+      </main>
+    </Router>
+  );
 }
 
-export default App
+export default App;

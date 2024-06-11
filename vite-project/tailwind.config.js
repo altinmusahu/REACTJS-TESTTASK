@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: ['Helvetica'],
       },
+      colors: {
+        customGray: '#202529'
+      }
     },
   },
   plugins: [],
