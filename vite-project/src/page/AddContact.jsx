@@ -1,13 +1,15 @@
 import { useState } from 'react';
-
-import { useContact } from '../storage/Contact.jsx';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 
 export default function AddContact() {
+
+  const navigate=useNavigate();
+
   const [emails, setEmails] = useState(['']);
   const [phoneNumbers, setPhoneNumbers] = useState(['']);
 
-  const { addContact } = useContact();
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [address, setAddress] = useState("");
@@ -40,30 +42,26 @@ export default function AddContact() {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newContact = {
-      name,
-      lastname,
-      address,
-      city,
-      country,
-      emails,
-      phoneNumbers,
-    };
-    addContact(newContact);
+        axios.post('http://localhost:4000/register',{
+          name,
+          lastname,
+          address,
+          city,
+          country,
+          emails,
+          phoneNumbers
+        }).then(result => {
+          console.log(result); // Log successful response
 
-    localStorage.setItem('contact', JSON.stringify(newContact));
+          if(result.data.message === "created") {
+              navigate('/')
+          }else{return;}
+      })
+      .catch(err => console.log(err))
+    }
 
-    
-    setName('');
-    setLastname('');
-    setAddress('');
-    setCity('');
-    setCountry('');
-    setEmails(['']);
-    setPhoneNumbers(['']);
-  };
 
   return (
     <div className="container mx-auto p-4 mt-8">
