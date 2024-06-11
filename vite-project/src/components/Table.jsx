@@ -25,7 +25,7 @@ export default function Table() {
   ];
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-12">
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
