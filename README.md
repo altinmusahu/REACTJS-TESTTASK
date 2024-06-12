@@ -7,3 +7,6 @@ in "vite-project" directory you should write npm install also in "server" direct
 
 ![image](https://github.com/altinmusahu/REACTJS-TESTTASK/assets/84867894/25d5eb9b-db95-4efd-9404-f20a9a879f6f)
 
+![image](https://github.com/altinmusahu/REACTJS-TESTTASK/assets/84867894/fbd38100-dc6b-4d72-830b-2037f6a709ce)
+
+![image](https://github.com/altinmusahu/REACTJS-TESTTASK/assets/84867894/ff20d5b7-4d84-4b65-82e1-8ae65727fe10)
