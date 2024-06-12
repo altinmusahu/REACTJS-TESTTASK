@@ -43,7 +43,7 @@ export default function AddContact() {
   };
 
   const isValidPhoneNumber = (number) => {
-    const phoneRegex = /^\d{9}$/; // Assuming a valid phone number has 10 digits
+    const phoneRegex = /^\d{9}$/; 
     return phoneRegex.test(number);
   };
 
@@ -67,7 +67,7 @@ export default function AddContact() {
           emails,
           phoneNumbers
         }).then(result => {
-          console.log(result); // Log successful response
+          console.log(result);
 
           if(result.data.message === "created") {
               navigate('/')
